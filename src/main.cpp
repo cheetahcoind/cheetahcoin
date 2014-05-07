@@ -950,20 +950,16 @@ int64 GetProofOfWorkReward(int nHeight, int64 nFees, uint256 prevHash)
     if (nHeight == 1)
         nSubsidy = 1500000 * COIN;  // premine
 
- if(nHeight >= 2 && <= 5)
- {
-  nSubsidy = 0;
-  return nSubsidy + nFees;
- }
-    else if(nHeight >= 6)
-    {
-        nSubsidy = 15000 * COIN;
-    }
+	if(nHeight == 2)
+	{
+		nSubsidy = TAX_PERCENTAGE * CIRCULATION_MONEY;
+		return nSubsidy + nFees;
+	}
     
- else if(nHeight > 10000)
- {
-  return nMinSubsidy + nFees;
- }
+	else if(nHeight > CUTOFF_HEIGHT)
+	{
+		return nMinSubsidy + nFees;
+	}
 
 
 
@@ -2120,10 +2116,9 @@ bool CBlock::AcceptBlock()
         return DoS(10, error("AcceptBlock() : prev block not found"));
     CBlockIndex* pindexPrev = (*mi).second;
     int nHeight = pindexPrev->nHeight+1;
-	if (IsProofOfWork() && nHeight > CUTOFF_POW_BLOCK)
+
+    if (IsProofOfWork() && nHeight > CUTOFF_POW_BLOCK)
         return DoS(100, error("AcceptBlock() : No proof-of-work allowed anymore (height = %d)", nHeight));
-        	if (IsProofOfStake() && nHeight < CUTOFF_POS_BLOCK)
-        return DoS(100, error("AcceptBlock() : No proof-of-stake not allowed (height = %d)", nHeight));
 
     // Check proof-of-work or proof-of-stake
     if (nBits != GetNextTargetRequired(pindexPrev, IsProofOfStake()))
