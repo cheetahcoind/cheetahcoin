@@ -1,0 +1,11 @@
+[Protocol]
+exec=Boxcoin-qt '%u'
+protocol=Boxcoin
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

@@ -1,0 +1,2 @@
+debian/bin/Boxcoind usr/bin
+src/Boxcoind usr/lib/Boxcoin
