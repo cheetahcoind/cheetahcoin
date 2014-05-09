@@ -1,2 +1,2 @@
-debian/bin/Boxcoind usr/bin
-src/Boxcoind usr/lib/Boxcoin
+debian/bin/Cheetahcoind usr/bin
+src/Cheetahcoind usr/lib/Cheetahcoin

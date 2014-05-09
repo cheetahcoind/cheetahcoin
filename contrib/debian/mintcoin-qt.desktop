@@ -1,13 +1,13 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=Boxcoin
-Comment=Boxcoin P2P Cryptocurrency
-Comment[fr]=Boxcoin, monnaie virtuelle cryptographique pair à pair
-Comment[tr]=Boxcoin, eşten eşe kriptografik sanal para birimi
-Comment[es]=Boxcoin, una criptomoneda P2P
-Exec=/usr/bin/Boxcoin-qt
+Name=Cheetahcoin
+Comment=Cheetahcoin P2P Cryptocurrency
+Comment[fr]=Cheetahcoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Cheetahcoin, eşten eşe kriptografik sanal para birimi
+Comment[es]=Cheetahcoin, una criptomoneda P2P
+Exec=/usr/bin/Cheetahcoin-qt
 Terminal=false
 Type=Application
 Icon=/usr/share/pixmaps/bitcoin80.xpm
-MimeType=x-scheme-handler/Boxcoin;
+MimeType=x-scheme-handler/Cheetahcoin;
 Categories=Office;

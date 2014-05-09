@@ -34,7 +34,7 @@ SendCoinsDialog::SendCoinsDialog(QWidget *parent) :
 
 #if QT_VERSION >= 0x040700
      /* Do not move this to the XML file, Qt before 4.7 will choke on it */
-     ui->lineEditCoinControlChange->setPlaceholderText(tr("Enter a Boxcoin address (e.g. MrXW1RKLDe8VMNwTwLwSiKuATN5M74EL85)"));
+     ui->lineEditCoinControlChange->setPlaceholderText(tr("Enter a Cheetahcoin address (e.g. MrXW1RKLDe8VMNwTwLwSiKuATN5M74EL85)"));
 #endif
 
     addEntry();
@@ -45,7 +45,7 @@ SendCoinsDialog::SendCoinsDialog(QWidget *parent) :
 	    // Coin Control
      ui->lineEditCoinControlChange->setFont(GUIUtil::bitcoinAddressFont());
      connect(ui->pushButtonCoinControl, SIGNAL(clicked()), this, SLOT(coinControlButtonClicked()));
-     connect(ui->checkBoxCoinControlChange, SIGNAL(stateChanged(int)), this, SLOT(coinControlChangeChecked(int)));
+     connect(ui->checkCheetahcoinControlChange, SIGNAL(stateChanged(int)), this, SLOT(coinControlChangeChecked(int)));
      connect(ui->lineEditCoinControlChange, SIGNAL(textEdited(const QString &)), this, SLOT(coinControlChangeEdited(const QString &)));
  
 		// Coin Control: clipboard actions

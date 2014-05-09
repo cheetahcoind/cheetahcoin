@@ -1,6 +1,6 @@
 [Protocol]
-exec=Boxcoin-qt '%u'
-protocol=Boxcoin
+exec=Cheetahcoin-qt '%u'
+protocol=Cheetahcoin
 input=none
 output=none
 helper=true

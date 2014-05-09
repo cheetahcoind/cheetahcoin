@@ -41,9 +41,9 @@ static CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
 static CBigNum bnProofOfWorkLimitTestNet(~uint256(0) >> 20);
 static CBigNum bnProofOfStakeLimitTestNet(~uint256(0) >> 20);
 
-unsigned int nStakeMinAge = 60 * 60 * 24 * 1;	// minimum age for coin age: 1d
-unsigned int nStakeMaxAge = 60 * 60 * 24 * 60;	// stake age of full weight: 60d
-unsigned int nStakeTargetSpacing = 30;			// 30 sec block spacing
+unsigned int nStakeMinAge = 60 * 60 * 0 * 1;	// minimum age for coin age: 1d
+unsigned int nStakeMaxAge = 60 * 60 * 0 * 80;	// stake age of full weight: 60d
+unsigned int nStakeTargetSpacing = 60;			// 30 sec block spacing
 
 int64 nChainStartTime = 1391393673;
 int nCoinbaseMaturity = 100;
@@ -68,7 +68,7 @@ map<uint256, map<uint256, CDataStream*> > mapOrphanTransactionsByPrev;
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "Boxcoin Signed Message:\n";
+const string strMessageMagic = "Cheetahcoin Signed Message:\n";
 
 double dHashesPerSec;
 int64 nHPSTimerStart;
@@ -936,11 +936,11 @@ int generateMTRandom(unsigned int s, int range)
 
 
 static const int64 nMinSubsidy = 10 * COIN;
-static const int CUTOFF_HEIGHT = 10000;	// Height at the end of 5 weeks
+static const int CUTOFF_HEIGHT = 5000;	// Height at the end of 5 weeks
 // miner's coin base reward based on nBits
 int64 GetProofOfWorkReward(int nHeight, int64 nFees, uint256 prevHash)
 {
-	int64 nSubsidy = 15000 * COIN;
+	int64 nSubsidy = 84000 * COIN;
 
     std::string cseed_str = prevHash.ToString().substr(14,7);
     const char* cseed = cseed_str.c_str();
@@ -948,7 +948,7 @@ int64 GetProofOfWorkReward(int nHeight, int64 nFees, uint256 prevHash)
     int rand = generateMTRandom(seed, 8000);
     
     if (nHeight == 1)
-        nSubsidy = 1500000 * COIN;  // premine
+        nSubsidy = 4452000 * COIN;  // 1.06% Premine
 
 	if(nHeight == 2)
 	{
@@ -970,7 +970,7 @@ int64 GetProofOfWorkReward(int nHeight, int64 nFees, uint256 prevHash)
 
 // miner's coin stake reward based on nBits and coin age spent (coin-days)
 // simple algorithm, not depend on the diff
-const int YEARLY_BLOCKCOUNT = 365000;	// 365 * 2880
+const int YEARLY_BLOCKCOUNT = 365000;	// 365 * 1000
 int64 GetProofOfStakeReward(int64 nCoinAge, unsigned int nBits, unsigned int nTime, int nHeight)
 {
     int64 nRewardCoinYear;
@@ -1517,8 +1517,8 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
     // Now that the whole chain is irreversibly beyond that time it is applied to all blocks except the
     // two in the chain that violate it. This prevents exploiting the issue against nodes in their
     // initial block download.
-    bool fEnforceBIP30 = true; // Always active in Boxcoin
-    bool fStrictPayToScriptHash = true; // Always active in Boxcoin
+    bool fEnforceBIP30 = true; // Always active in Cheetahcoin
+    bool fStrictPayToScriptHash = true; // Always active in Cheetahcoin
 
     //// issue here: it doesn't know the version
     unsigned int nTxPos;
@@ -2464,7 +2464,7 @@ bool CheckDiskSpace(uint64 nAdditionalBytes)
         string strMessage = _("Warning: Disk space is low!");
         strMiscWarning = strMessage;
         printf("*** %s\n", strMessage.c_str());
-        uiInterface.ThreadSafeMessageBox(strMessage, "Boxcoin", CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION | CClientUIInterface::MODAL);
+        uiInterface.ThreadSafeMessageBox(strMessage, "Cheetahcoin", CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION | CClientUIInterface::MODAL);
         StartShutdown();
         return false;
     }
@@ -2527,9 +2527,9 @@ bool LoadBlockIndex(bool fAllowNew)
     if (fTestNet)
     {
         pchMessageStart[0] = 0xf2;
-        pchMessageStart[1] = 0xcd;
-        pchMessageStart[2] = 0xef;
-        pchMessageStart[3] = 0xc0;
+        pchMessageStart[1] = 0xef;
+        pchMessageStart[2] = 0xc0;
+        pchMessageStart[3] = 0xcd;
 
         bnProofOfStakeLimit = bnProofOfStakeLimitTestNet; // 0x00000fff PoS base target is fixed in testnet
         bnProofOfWorkLimit = bnProofOfWorkLimitTestNet; // 0x0000ffff PoW base target is fixed in testnet
@@ -2554,10 +2554,10 @@ bool LoadBlockIndex(bool fAllowNew)
     if (mapBlockIndex.empty())
     {
         if (!fAllowNew)
-            return true;
+            return false;
 
         // Genesis block
-        const char* pszTimestamp = "Boxcoin birthplace, Moscow, russia forever.";
+        const char* pszTimestamp = "What goes to the moon, never goes back down.";
         CTransaction txNew;
         txNew.nTime = nChainStartTime;
         txNew.vin.resize(1);
@@ -2570,23 +2570,23 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1; 
-        block.nTime    = 1399421276;
+        block.nTime    = 1399591809;
         block.nBits    = bnProofOfWorkLimit.GetCompact();
-        block.nNonce   = 540018;
-	if (true  && (block.GetHash() != hashGenesisBlock)) {
+        block.nNonce   = 331807;
+    if (false  && (block.GetHash() != hashGenesisBlock)) {
 
-		// This will figure out a valid hash and Nonce if you're
-		// creating a different genesis block:
-		    uint256 hashTarget = CBigNum().SetCompact(block.nBits).getuint256();
-		    while (block.GetHash() > hashTarget)
-		       {
-		           ++block.nNonce;
-		           if (block.nNonce == 0)
-		           {
-		               printf("NONCE WRAPPED, incrementing time");
-		               ++block.nTime;
-		           }
-		       }
+        // This will figure out a valid hash and Nonce if you're
+        // creating a different genesis block:
+            uint256 hashTarget = CBigNum().SetCompact(block.nBits).getuint256();
+            while (block.GetHash() > hashTarget)
+               {
+                   ++block.nNonce;
+                   if (block.nNonce == 331807)
+                   {
+                       printf("NONCE WRAPPED, incrementing time");
+                       ++block.nTime;
+                   }
+               }
         }
 
 
@@ -2599,7 +2599,7 @@ bool LoadBlockIndex(bool fAllowNew)
 
 
 
-        assert(block.hashMerkleRoot == uint256("fac77798edd5d102c06b4e11cd6cdbab34d5b621bc8c95a27a153f1d74da1db1"));
+        assert(block.hashMerkleRoot == uint256("eff5d73a65285a54537849310a949e0de9b3861237d1baa419c5f750c82c1c7d"));
 		assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
 
         // Start new block file

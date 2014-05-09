@@ -1,5 +1,5 @@
-Boxcoin-qt usr/bin
+Cheetahcoin-qt usr/bin
 share/pixmaps/bitcoin32.xpm usr/share/pixmaps
 share/pixmaps/bitcoin80.xpm usr/share/pixmaps
-debian/Boxcoin-qt.desktop usr/share/applications
-debian/Boxcoin-qt.protocol usr/share/kde4/services/
+debian/Cheetahcoin-qt.desktop usr/share/applications
+debian/Cheetahcoin-qt.protocol usr/share/kde4/services/

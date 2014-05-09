@@ -5,29 +5,29 @@
 #build/bitcoind::
 #	$(if $(filter nocheck,$(DEB_BUILD_OPTIONS)),,src/test_bitcoin)
 
-DEB_INSTALL_EXAMPLES_Boxcoind += debian/examples/*
-DEB_INSTALL_MANPAGES_Boxcoind += debian/manpages/*
+DEB_INSTALL_EXAMPLES_Cheetahcoind += debian/examples/*
+DEB_INSTALL_MANPAGES_Cheetahcoind += debian/manpages/*
 
 %:
 	dh --with bash-completion $@
 
 override_dh_auto_build:
-	cd src; $(MAKE) -f makefile.unix Boxcoind
+	cd src; $(MAKE) -f makefile.unix Cheetahcoind
 	$(MAKE)
 
 override_dh_auto_clean:
-	if [ -f Makefile ]; then $(MAKE) clean; else rm -rf build/; rm -f Boxcoin-qt; fi
+	if [ -f Makefile ]; then $(MAKE) clean; else rm -rf build/; rm -f Cheetahcoin-qt; fi
 	cd src; $(MAKE) -f makefile.unix clean
 
 override_dh_auto_configure:
-	qmake Boxcoin-qt.pro USE_QRCODE=1
+	qmake Cheetahcoin-qt.pro USE_QRCODE=1
 
 override_dh_auto_test:
-	cd src; $(MAKE) -f makefile.unix test_Boxcoin
-	src/test_Boxcoin
+	cd src; $(MAKE) -f makefile.unix test_Cheetahcoin
+	src/test_Cheetahcoin
 
 # Ensure wrapper is set executable
-binary-post-install/Boxcoind:
-	chmod +x $(cdbs_curdestdir)usr/bin/Boxcoind
-binary-post-install/Boxcoin-qt:
-	chmod +x $(cdbs_curdestdir)usr/bin/Boxcoin-qt
+binary-post-install/Cheetahcoind:
+	chmod +x $(cdbs_curdestdir)usr/bin/Cheetahcoind
+binary-post-install/Cheetahcoin-qt:
+	chmod +x $(cdbs_curdestdir)usr/bin/Cheetahcoin-qt

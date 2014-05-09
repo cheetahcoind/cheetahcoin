@@ -4,13 +4,13 @@ set -e
 
 umask 077
 
-basedir=~/.Boxcoin
+basedir=~/.Cheetahcoin
 dbfile="$basedir/DB_CONFIG"
-cfgfile="$basedir/Boxcoin.conf"
+cfgfile="$basedir/Cheetahcoin.conf"
 
 [ -e "$basedir" ] || mkdir "$basedir"
 
-# Boxcoin does not clean up DB log files by default
+# Cheetahcoin does not clean up DB log files by default
 [ -e "$dbfile" ] || echo 'set_flags DB_LOG_AUTOREMOVE' > "$dbfile"
 
-exec /usr/lib/Boxcoin/Boxcoin-qt "$@"
+exec /usr/lib/Cheetahcoin/Cheetahcoin-qt "$@"

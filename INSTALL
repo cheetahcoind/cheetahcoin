@@ -1,9 +1,9 @@
-Building Boxcoin
+Building Cheetahcoin
 
-See doc/readme-qt.rst for instructions on building Boxcoin QT,
+See doc/readme-qt.rst for instructions on building Cheetahcoin QT,
 the intended-for-end-users, nice-graphical-interface, reference
-implementation of Boxcoin.
+implementation of Cheetahcoin.
 
-See doc/build-*.txt for instructions on building Boxcoind,
+See doc/build-*.txt for instructions on building Cheetahcoind,
 the intended-for-services, no-graphical-interface, reference
-implementation of Boxcoin.
+implementation of Cheetahcoin.
